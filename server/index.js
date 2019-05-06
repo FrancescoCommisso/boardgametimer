@@ -10,6 +10,8 @@ app.use(pino);
 
 var games = {};
 
+app.use(express.static(path.join(__dirname, "client/build")));
+
 app.post("/api/addgame", (req, res) => {
   var g = new Game(req.body);
   g.init();
