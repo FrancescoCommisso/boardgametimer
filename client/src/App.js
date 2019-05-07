@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import Game from "./components/Game";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import CreateGame from "./components/CreateGame";
 
 class App extends Component {
   constructor() {
@@ -30,8 +31,8 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-          <Route exact path="/" component={this.createGame} />
-          <Route path="/game" component={this.addGame} />
+          <Route exact path="/" component={CreateGame} />
+          <Route path="/game/:id" component={Game} />
         </Switch>
       </Router>
     );

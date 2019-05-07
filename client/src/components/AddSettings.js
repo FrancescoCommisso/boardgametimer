@@ -2,13 +2,8 @@ import React, { Component } from "react";
 
 class AddSettings extends Component {
   state = {
-    time: null,
+    time: 1,
     autoStart: false
-  };
-
-  handleOnCreate = id => {
-    console.log("id: " + id);
-    this.setState({ id: id });
   };
 
   handleSubmit = e => {
@@ -30,7 +25,11 @@ class AddSettings extends Component {
         <div>
           <h2>Add Rules</h2>
           <p>How long should each turn be?</p>
-          <input onChange={this.onTimeChange} name="time" />
+          <input
+            value={this.state.time}
+            onChange={this.onTimeChange}
+            name="time"
+          />
           <label>Min</label>
           <p>Start each new turn automatically?</p>
           <input

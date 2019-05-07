@@ -13,6 +13,10 @@ class CreateGame extends Component {
     this.setState({ players: players });
   };
 
+  componentDidMount() {
+    this.setState({ new_id: this.generateID() });
+  }
+
   handleFinish = settings => {
     this.setState({ gameSettings: settings }, () => {
       fetch("/api/addgame", {
@@ -22,17 +26,13 @@ class CreateGame extends Component {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(this.state)
-      }).then(res => {
-        if (res.status === 200) {
-          this.setState({ showState: true });
-        }
-      });
+      }).then(this.props.history.push(`/game/${this.state.id}`));
     });
   };
 
-  handleOnCreate = id => {
-    console.log("id: " + id);
-    this.setState({ id: id });
+  handleOnCreate = () => {
+    console.log("id: " + this.state.new_id);
+    this.setState({ id: this.state.new_id });
   };
 
   generateID() {
