@@ -105,7 +105,7 @@ class Game extends Component {
   };
 
   render() {
-    if (this.state) {
+    if (this.state.id) {
       return (
         <div>
           <Sound url={chirp} playbackRate={4} playStatus={this.playsound()} />

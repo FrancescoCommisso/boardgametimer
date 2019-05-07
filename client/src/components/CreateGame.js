@@ -1,16 +1,38 @@
 import React, { Component } from "react";
+import AddPlayers from "./AddPlayers";
+import AddSettings from "./AddSettings";
 
 class CreateGame extends Component {
   state = {
-    id: null
+    id: null,
+    players: null,
+    gameSettings: null
   };
 
-  componentDidMount() {
-    this.setState({ id: this.generateID() });
-  }
+  handleNext = players => {
+    this.setState({ players: players });
+  };
 
-  handleClick = () => {
-    this.props.onCreate(this.state.id);
+  handleFinish = settings => {
+    this.setState({ gameSettings: settings }, () => {
+      fetch("/api/addgame", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(this.state)
+      }).then(res => {
+        if (res.status === 200) {
+          this.setState({ showState: true });
+        }
+      });
+    });
+  };
+
+  handleOnCreate = id => {
+    console.log("id: " + id);
+    this.setState({ id: id });
   };
 
   generateID() {
@@ -25,16 +47,24 @@ class CreateGame extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <h2>Create Game</h2>
-        <p>Here is your Game-ID</p>
-        <h1>{this.state.id}</h1>
-        <p>Others can use it to access this game session from their device!</p>
+    if (this.state.id === null) {
+      return (
+        <div>
+          <h2>Create Game</h2>
+          <p>Here is your Game-ID</p>
+          <h1>{this.state.id}</h1>
+          <p>
+            Others can use it to access this game session from their device!
+          </p>
 
-        <button onClick={this.handleClick}>Create</button>
-      </div>
-    );
+          <button onClick={this.handleOnCreate}>Create</button>
+        </div>
+      );
+    } else if (this.state.players === null) {
+      return <AddPlayers onNext={this.handleNext} />;
+    } else {
+      return <AddSettings onNext={this.handleFinish} />;
+    }
   }
 }
 

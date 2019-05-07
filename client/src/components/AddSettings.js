@@ -6,6 +6,11 @@ class AddSettings extends Component {
     autoStart: false
   };
 
+  handleOnCreate = id => {
+    console.log("id: " + id);
+    this.setState({ id: id });
+  };
+
   handleSubmit = e => {
     e.preventDefault();
     this.props.onNext(this.state);
@@ -25,11 +30,7 @@ class AddSettings extends Component {
         <div>
           <h2>Add Rules</h2>
           <p>How long should each turn be?</p>
-          <input
-            onChange={this.onTimeChange}
-            name="time"
-            style={{ backgroundColor: "green" }}
-          />
+          <input onChange={this.onTimeChange} name="time" />
           <label>Min</label>
           <p>Start each new turn automatically?</p>
           <input
