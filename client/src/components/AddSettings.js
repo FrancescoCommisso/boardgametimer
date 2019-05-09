@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class AddSettings extends Component {
   state = {
-    time: null,
+    time: 1,
     autoStart: false
   };
 
@@ -22,13 +22,13 @@ class AddSettings extends Component {
   render() {
     return (
       <form>
-        <div>
+        <div className="text-center">
           <h2>Add Rules</h2>
           <p>How long should each turn be?</p>
           <input
+            value={this.state.time}
             onChange={this.onTimeChange}
             name="time"
-            style={{ backgroundColor: "green" }}
           />
           <label>Min</label>
           <p>Start each new turn automatically?</p>

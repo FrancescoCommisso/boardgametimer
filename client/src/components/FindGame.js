@@ -19,24 +19,51 @@ class FindGame extends Component {
       body: JSON.stringify({ id: this.state.id })
     }).then(response => {
       if (response.status == 200) {
-        this.setState(response.json());
-        this.props.handleFindGame(this.state);
+        this.props.history.push(`/game/${this.state.id}`);
       } else {
         this.setState({ error: "Invalid Game-ID" });
       }
     });
   };
   render() {
+    let error;
+
+    if (this.state.error) {
+      error = (
+        <p style={{ color: "red" }} className="text-center">
+          This Game-ID is invalid
+        </p>
+      );
+    } else {
+      error = (
+        <p style={{ color: "red" }} className="text-center">
+          <br />
+        </p>
+      );
+    }
+
     return (
-      <div>
+      <div className="">
         <form onSubmit={this.handleJoinGame}>
-          <h1>Find Game</h1>
+          <h2>Find Game</h2>
           <p>
-            If one of your friend's has already created a game, enter the
+            If a member of your party has already created a game, enter the
             Game-ID here
           </p>
-          <input onChange={this.handleIDChange} placeholder="XXXXX" />
-          <button onClick={this.handleJoinGame}>Join Game</button>
+          <input
+            className="text-center btn-block"
+            onChange={this.handleIDChange}
+            placeholder="XXXXX"
+          />
+
+          {error}
+
+          <button
+            className="btn-block bg-warning"
+            onClick={this.handleJoinGame}
+          >
+            Join Game
+          </button>
         </form>
       </div>
     );

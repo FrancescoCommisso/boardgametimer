@@ -7,33 +7,36 @@ const bell = require("../assets/bell.mp3");
 const chirp = require("../assets/chirp.mp3");
 
 class Game extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.state = {
+      id: this.props.match.params.id
+    };
   }
 
   componentDidMount() {
-    console.log("url: " + missileSound);
-
     fetch("/api/game", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ id: this.props.gameID })
-    })
-      .then(response => response.json())
-      .then(state => this.setState(state));
-    this.calcTotalTime();
+      body: JSON.stringify(this.state)
+    }).then(res => this.checkResponse(res));
   }
+
+  checkResponse = res => {
+    if (res.status === 200) {
+      res.json().then(state => this.setState(state, this.calcTotalTime()));
+    }
+  };
 
   calcTotalTime = () => {
     this.interval = setInterval(() => {
       var elapsed = Date.now() - this.state.gameState.gameStartTime;
       this.setState({ totalTime: pretty(elapsed) });
-
       this.getRemainingTime();
-    }, 1000);
+    }, 100);
   };
 
   componentWillUnmount() {
@@ -47,10 +50,10 @@ class Game extends Component {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ id: this.props.gameID })
-    })
-      .then(response => response.json())
-      .then(state => this.setState(state));
+      body: JSON.stringify({ id: this.state.id })
+    }).then(response => {
+      this.setState(response.json());
+    });
   };
 
   getRemainingTime = () => {
@@ -60,7 +63,7 @@ class Game extends Component {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ id: this.props.gameID })
+      body: JSON.stringify({ id: this.state.id })
     })
       .then(response => response.json())
       .then(state => this.setState({ gameState: state }));
@@ -73,7 +76,7 @@ class Game extends Component {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ id: this.props.gameID })
+      body: JSON.stringify({ id: this.state.id })
     }).then(response => response.json());
   };
 
@@ -84,7 +87,7 @@ class Game extends Component {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ id: this.props.gameID })
+      body: JSON.stringify({ id: this.state.id })
     });
   };
 
@@ -97,17 +100,15 @@ class Game extends Component {
   };
 
   playsound = () => {
-    if (this.state.gameState.remainingTimeForTurn < 1) {
+    if (this.state.gameState.remainingTimeForTurn == 0) {
       return Sound.status.PLAYING;
-    } else {
-      return Sound.status.STOPPED;
     }
   };
 
   render() {
-    if (this.state) {
+    if (this.state.gameState) {
       return (
-        <div>
+        <div className="text-center ">
           <Sound url={chirp} playbackRate={4} playStatus={this.playsound()} />
           <h1>{this.state.id}</h1>
           <h2>{this.state.gameState.currentPlayer}'s Turn</h2>
@@ -116,13 +117,23 @@ class Game extends Component {
           </h3>
           <h5>Total Time: {this.state.totalTime}</h5>
           <h5>Turn#: {this.state.gameState.totalTurns}</h5>
-          <button onClick={this.handlePause}>{this.determinePaused()}</button>
-          <button onClick={this.handleEndTurn}>End Turn</button>
-          <button onClick={this.handleRestart}>Restart Turn</button>
+          <button className="btn-block" onClick={this.handlePause}>
+            {this.determinePaused()}
+          </button>
+          <button
+            className="btn-block"
+            style={{ height: "90px" }}
+            onClick={this.handleEndTurn}
+          >
+            End Turn
+          </button>
+          <button className="btn-block" onClick={this.handleRestart}>
+            Restart Turn
+          </button>
         </div>
       );
     } else {
-      return <div>shouldnt be seeing this</div>;
+      return <div>That Game-ID is no longer valid</div>;
     }
   }
 }

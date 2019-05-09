@@ -1,16 +1,40 @@
 import React, { Component } from "react";
+import AddPlayers from "./AddPlayers";
+import AddSettings from "./AddSettings";
+import FindGame from "./FindGame";
+import { Button } from "react-bootstrap";
 
 class CreateGame extends Component {
   state = {
-    id: null
+    id: null,
+    players: null,
+    gameSettings: null
+  };
+
+  handleNext = players => {
+    this.setState({ players: players });
   };
 
   componentDidMount() {
-    this.setState({ id: this.generateID() });
+    this.setState({ new_id: this.generateID() });
   }
 
-  handleClick = () => {
-    this.props.onCreate(this.state.id);
+  handleFinish = settings => {
+    this.setState({ gameSettings: settings }, () => {
+      fetch("/api/addgame", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(this.state)
+      }).then(this.props.history.push(`/game/${this.state.id}`));
+    });
+  };
+
+  handleOnCreate = () => {
+    console.log("id: " + this.state.new_id);
+    this.setState({ id: this.state.new_id });
   };
 
   generateID() {
@@ -23,18 +47,38 @@ class CreateGame extends Component {
     }
     return result;
   }
+  handleFindGame = game => {
+    console.log("handlefinegame() from App: ");
+    this.setState({ gameSettings: game.gameSettings });
+    this.setState({ players: game.players });
+    this.setState({ id: game.id });
+
+    this.setState({ showState: true });
+  };
 
   render() {
-    return (
-      <div>
-        <h2>Create Game</h2>
-        <p>Here is your Game-ID</p>
-        <h1>{this.state.id}</h1>
-        <p>Others can use it to access this game session from their device!</p>
+    if (this.state.id === null) {
+      return (
+        <div className="">
+          <h2 className="">Create Game</h2>
+          <p>Here is your Game-ID</p>
+          <h1 className="text-center">{this.state.new_id}</h1>
+          <p>
+            Others can use it to access this game session from their device!
+          </p>
 
-        <button onClick={this.handleClick}>Create</button>
-      </div>
-    );
+          <button className="bg-info btn-block" onClick={this.handleOnCreate}>
+            Create New Game
+          </button>
+
+          <div className="col" />
+        </div>
+      );
+    } else if (this.state.players === null) {
+      return <AddPlayers onNext={this.handleNext} />;
+    } else {
+      return <AddSettings onNext={this.handleFinish} />;
+    }
   }
 }
 

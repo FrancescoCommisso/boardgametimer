@@ -2,10 +2,10 @@ import React, { Component } from "react";
 
 class AddPlayers extends Component {
   state = {
-    p1: "",
-    p2: "",
-    p3: "",
-    p4: ""
+    p1: "player1",
+    p2: "player2",
+    p3: "player3",
+    p4: "player4"
   };
 
   handleSubmit = e => {
@@ -36,20 +36,47 @@ class AddPlayers extends Component {
     return (
       <div>
         <h2>Add Players</h2>
-        <form onSubmit={this.handleSubmit}>
-          <div style={{ backgroundColor: "blue" }}>
-            <input name="p1" placeholder="p1" onChange={this.handlep1change} />
+        <form className="text-center block" onSubmit={this.handleSubmit}>
+          <div>
+            <input
+              className="text-center"
+              value={this.state.p1}
+              name="p1"
+              placeholder="p1"
+              onChange={this.handlep1change}
+            />
           </div>
-          <div style={{ backgroundColor: "blue" }}>
-            <input name="p2" placeholder="p2" onChange={this.handlep2change} />
+          <div>
+            <input
+              className="text-center"
+              value={this.state.p2}
+              name="p2"
+              placeholder="p2"
+              onChange={this.handlep2change}
+            />
           </div>
-          <div style={{ backgroundColor: "blue" }}>
-            <input name="p3" placeholder="p3" onChange={this.handlep3change} />
+          <div>
+            <input
+              className="text-center"
+              value={this.state.p3}
+              name="p3"
+              placeholder="p3"
+              onChange={this.handlep3change}
+            />
           </div>
-          <div style={{ backgroundColor: "blue" }}>
-            <input name="p4" placeholder="p4" onChange={this.handlep4change} />
+          <div>
+            <input
+              className="text-center"
+              value={this.state.p4}
+              name="p4"
+              placeholder="p4"
+              onChange={this.handlep4change}
+            />
           </div>
-          <button>Next</button>
+          <br />
+          <button className="btn-block" style={{ backgroundColor: "green" }}>
+            Next
+          </button>
         </form>
       </div>
     );

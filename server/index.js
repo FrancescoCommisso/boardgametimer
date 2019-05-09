@@ -29,16 +29,19 @@ app.get("/api/games", (req, res) => {
 });
 
 app.post("/api/game", (req, res) => {
-  console.log(
-    "checking if " +
-      JSON.stringify(games) +
-      " has " +
-      JSON.stringify(games[req.body.id].id)
-  );
-
-  if (games.hasOwnProperty(games[req.body.id].id)) {
-    res.send(JSON.stringify(games[req.body.id]));
-  } else {
+  // console.log(
+  //   "checking if " +
+  //     JSON.stringify(games) +
+  //     " has " +
+  //     JSON.stringify(games[req.body.id].id)
+  // );
+  try {
+    if (games.hasOwnProperty(games[req.body.id].id)) {
+      res.send(JSON.stringify(games[req.body.id]));
+    } else {
+      res.sendStatus(404);
+    }
+  } catch (e) {
     res.sendStatus(404);
   }
 });
