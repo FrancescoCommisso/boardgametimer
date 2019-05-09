@@ -3,6 +3,9 @@ import "./App.css";
 import Game from "./components/Game";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import CreateGame from "./components/CreateGame";
+import Description from "./components/Description";
+import FindGame from "./components/FindGame";
+import { Container, Row, Col } from "react-bootstrap";
 
 class App extends Component {
   constructor() {
@@ -30,40 +33,20 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Switch>
-          <Route exact path="/" component={CreateGame} />
-          <Route path="/game/:id" component={Game} />
-        </Switch>
+        <Container style={{ maxWidth: "700px" }}>
+          <Row>
+            <Col>
+              <Switch>
+                <Route exact path="/" component={Description} />
+                <Route exact path="/create" component={CreateGame} />
+                <Route exact path="/find" component={FindGame} />
+                <Route path="/game/:id" component={Game} />
+              </Switch>
+            </Col>
+          </Row>
+        </Container>
       </Router>
     );
-
-    //   if (this.state.id === null) {
-    //     return (
-    //       <div>
-    //         <CreateGame onCreate={this.handleOnCreate} gameID={this.state.id} />
-    //         <FindGame handleFindGame={this.handleFindGame} />
-    //       </div>
-    //     );
-    //   }
-    //   if (this.state.players === null) {
-    //     return (
-    //       <div>
-    //         <AddPlayers onNext={this.handleNext} gameID={this.state.id} />
-    //       </div>
-    //     );
-    //   }
-    //   if (this.state.gameSettings === null) {
-    //     return (
-    //       <div>
-    //         <AddSettings onNext={this.handleFinish} gameID={this.state.id} />
-    //       </div>
-    //     );
-    //   }
-    //   if (this.state.showState) {
-    //     return <div>{<Game gameID={this.state.id} />}</div>;
-    //   } else {
-    //     return <div>Ya'll shouldnt be seeing this!</div>;
-    //   }
   }
 }
 export default App;

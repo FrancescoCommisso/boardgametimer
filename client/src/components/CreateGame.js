@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import AddPlayers from "./AddPlayers";
 import AddSettings from "./AddSettings";
+import FindGame from "./FindGame";
+import { Button } from "react-bootstrap";
 
 class CreateGame extends Component {
   state = {
@@ -45,19 +47,31 @@ class CreateGame extends Component {
     }
     return result;
   }
+  handleFindGame = game => {
+    console.log("handlefinegame() from App: ");
+    this.setState({ gameSettings: game.gameSettings });
+    this.setState({ players: game.players });
+    this.setState({ id: game.id });
+
+    this.setState({ showState: true });
+  };
 
   render() {
     if (this.state.id === null) {
       return (
-        <div>
-          <h2>Create Game</h2>
+        <div className="">
+          <h2 className="">Create Game</h2>
           <p>Here is your Game-ID</p>
-          <h1>{this.state.id}</h1>
+          <h1 className="text-center">{this.state.new_id}</h1>
           <p>
             Others can use it to access this game session from their device!
           </p>
 
-          <button onClick={this.handleOnCreate}>Create</button>
+          <button className="bg-info btn-block" onClick={this.handleOnCreate}>
+            Create New Game
+          </button>
+
+          <div className="col" />
         </div>
       );
     } else if (this.state.players === null) {

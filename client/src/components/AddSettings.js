@@ -22,7 +22,7 @@ class AddSettings extends Component {
   render() {
     return (
       <form>
-        <div>
+        <div className="text-center">
           <h2>Add Rules</h2>
           <p>How long should each turn be?</p>
           <input

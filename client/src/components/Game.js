@@ -108,7 +108,7 @@ class Game extends Component {
   render() {
     if (this.state.gameState) {
       return (
-        <div>
+        <div className="text-center ">
           <Sound url={chirp} playbackRate={4} playStatus={this.playsound()} />
           <h1>{this.state.id}</h1>
           <h2>{this.state.gameState.currentPlayer}'s Turn</h2>
@@ -117,9 +117,19 @@ class Game extends Component {
           </h3>
           <h5>Total Time: {this.state.totalTime}</h5>
           <h5>Turn#: {this.state.gameState.totalTurns}</h5>
-          <button onClick={this.handlePause}>{this.determinePaused()}</button>
-          <button onClick={this.handleEndTurn}>End Turn</button>
-          <button onClick={this.handleRestart}>Restart Turn</button>
+          <button className="btn-block" onClick={this.handlePause}>
+            {this.determinePaused()}
+          </button>
+          <button
+            className="btn-block"
+            style={{ height: "90px" }}
+            onClick={this.handleEndTurn}
+          >
+            End Turn
+          </button>
+          <button className="btn-block" onClick={this.handleRestart}>
+            Restart Turn
+          </button>
         </div>
       );
     } else {
