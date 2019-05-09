@@ -11,6 +11,27 @@ app.use(pino);
 
 var games = {};
 
+function addTestGame() {
+  var test = {
+    id: "test",
+    players: ["player1", "player2", "player3", "player4"],
+    gameState: {
+      paused: false,
+      currentPlayer: null,
+      remainingTimeForTurn: null,
+      gameStartTime: Date.now(),
+      totalTurns: 0,
+      currentPlayerStartTime: null
+    },
+    gameSettings: { time: 60000, autoStart: true }
+  };
+  var g = new Game(test);
+  g.init();
+  games[g.id] = g;
+}
+
+addTestGame();
+
 app.use(express.static(path.join(__dirname, "../client/build")));
 
 app.post("/api/addgame", (req, res) => {
@@ -29,12 +50,6 @@ app.get("/api/games", (req, res) => {
 });
 
 app.post("/api/game", (req, res) => {
-  // console.log(
-  //   "checking if " +
-  //     JSON.stringify(games) +
-  //     " has " +
-  //     JSON.stringify(games[req.body.id].id)
-  // );
   try {
     if (games.hasOwnProperty(games[req.body.id].id)) {
       res.send(JSON.stringify(games[req.body.id]));
