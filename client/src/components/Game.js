@@ -34,7 +34,7 @@ class Game extends Component {
 
   calcTotalTime = () => {
     this.interval = setInterval(() => {
-      var elapsed = Date.now() - this.state.gameState.gameStartTime;
+      var elapsed = Math.abs(Date.now() - this.state.gameState.gameStartTime);
       this.setState({ totalTime: pretty(elapsed) });
       this.getRemainingTime();
     }, 100);
