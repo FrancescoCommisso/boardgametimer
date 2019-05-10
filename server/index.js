@@ -32,16 +32,6 @@ function addTestGame() {
 
 addTestGame();
 
-app.get("/*", function(req, res) {
-  res.sendFile(path.join(__dirname, "../client/build/index.html"), function(
-    err
-  ) {
-    if (err) {
-      res.status(500).send(err);
-    }
-  });
-});
-
 app.use(express.static(path.join(__dirname, "../client/build")));
 
 app.post("/api/addgame", (req, res) => {
@@ -85,6 +75,10 @@ app.post("/api/input/restart", (req, res) => {
 });
 app.post("/api/getstate", (req, res) => {
   res.send(JSON.stringify(games[req.body.id]));
+});
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "../client/build/index.html"));
 });
 
 const port = process.env.PORT || 3001;
