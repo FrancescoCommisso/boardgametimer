@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import "./Main.css";
 class AddPlayers extends Component {
   state = {
     p1: "player1",
@@ -34,12 +34,13 @@ class AddPlayers extends Component {
 
   render() {
     return (
-      <div>
+      <div className="top sub">
         <h2>Add Players</h2>
+        <p>Enter each player's name</p>
         <form className="text-center block" onSubmit={this.handleSubmit}>
           <div>
             <input
-              className="text-center"
+              className="form-control my-1"
               value={this.state.p1}
               name="p1"
               placeholder="p1"
@@ -48,7 +49,7 @@ class AddPlayers extends Component {
           </div>
           <div>
             <input
-              className="text-center"
+              className="form-control my-1"
               value={this.state.p2}
               name="p2"
               placeholder="p2"
@@ -57,7 +58,7 @@ class AddPlayers extends Component {
           </div>
           <div>
             <input
-              className="text-center"
+              className="form-control my-1"
               value={this.state.p3}
               name="p3"
               placeholder="p3"
@@ -66,7 +67,7 @@ class AddPlayers extends Component {
           </div>
           <div>
             <input
-              className="text-center"
+              className="form-control my-1"
               value={this.state.p4}
               name="p4"
               placeholder="p4"
@@ -74,9 +75,7 @@ class AddPlayers extends Component {
             />
           </div>
           <br />
-          <button className="btn-block" style={{ backgroundColor: "green" }}>
-            Next
-          </button>
+          <button className="btn-block b1">Next</button>
         </form>
       </div>
     );
