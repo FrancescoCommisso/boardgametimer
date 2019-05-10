@@ -77,10 +77,6 @@ app.post("/api/getstate", (req, res) => {
   res.send(JSON.stringify(games[req.body.id]));
 });
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname + "../client/build/index.html"));
-});
-
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log("Express server is running on localhost:3001");
