@@ -158,7 +158,8 @@ class Game extends Component {
     } else {
       return (
         <div className="top sub">
-          <h1>Refresh the page or check the Game-ID</h1>
+          <h1>Something Broke...</h1>
+          <h4>Refresh the page or check the Game-ID</h4>
         </div>
       );
     }
