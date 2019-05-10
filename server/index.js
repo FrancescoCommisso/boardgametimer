@@ -8,6 +8,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({ extended: false }));
 app.use(pino);
+app.use(express.static(path.join(__dirname, "../client/build")));
 
 var games = {};
 
@@ -31,8 +32,6 @@ function addTestGame() {
 }
 
 addTestGame();
-
-app.use(express.static(path.join(__dirname, "../client/build")));
 
 app.post("/api/addgame", (req, res) => {
   var g = new Game(req.body);
@@ -75,6 +74,16 @@ app.post("/api/input/restart", (req, res) => {
 });
 app.post("/api/getstate", (req, res) => {
   res.send(JSON.stringify(games[req.body.id]));
+});
+
+app.get("*", function(req, res) {
+  res.sendFile(path.join(__dirname, "../client/build/index.html"), function(
+    err
+  ) {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
 });
 
 const port = process.env.PORT || 3001;
