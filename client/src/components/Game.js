@@ -156,7 +156,11 @@ class Game extends Component {
         </Container>
       );
     } else {
-      return <div>That Game-ID is no longer valid</div>;
+      return (
+        <div className="top sub">
+          <h1>Refresh the page or check the Game-ID</h1>
+        </div>
+      );
     }
   }
 }
