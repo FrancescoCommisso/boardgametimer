@@ -6,7 +6,7 @@ import { Container, Row, Col } from "react-bootstrap";
 class AddSettings extends Component {
   state = {
     time: 1,
-    autoStart: false
+    autoStart: true
   };
 
   handleSubmit = e => {
@@ -47,7 +47,11 @@ class AddSettings extends Component {
           <Row className="my-3">
             <Col>
               <div class="pretty p-switch p-fill">
-                <input onChange={this.onAutoStartChange} type="checkbox" />
+                <input
+                  defaultChecked={this.state.autoStart}
+                  onChange={this.onAutoStartChange}
+                  type="checkbox"
+                />
                 <div class="state">
                   <label>{auto}</label>
                 </div>

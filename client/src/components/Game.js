@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Container, Col, Row } from "react-bootstrap";
 const pretty = require("pretty-ms");
 const Sound = require("react-sound").default;
+const toneSound = require("../assets/tone.mp3");
 const missileSound = require("../assets/missile.mp3");
 const finishSound = require("../assets/foghorn.mp3");
 const bell = require("../assets/bell.mp3");
