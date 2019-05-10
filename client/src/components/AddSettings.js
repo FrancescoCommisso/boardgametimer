@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import "pretty-checkbox/src/pretty-checkbox.scss";
+import "./Main.css";
+import { Container, Row, Col } from "react-bootstrap";
 
 class AddSettings extends Component {
   state = {
@@ -20,29 +23,47 @@ class AddSettings extends Component {
   };
 
   render() {
+    var auto = this.state.autoStart ? "Yes" : "No";
+
     return (
-      <form>
-        <div className="text-center">
+      <form className="top ">
+        <Container className=" sub">
           <h2>Add Rules</h2>
           <p>How long should each turn be?</p>
-          <input
-            value={this.state.time}
-            onChange={this.onTimeChange}
-            name="time"
-          />
-          <label>Min</label>
+          <Row className="my-3">
+            <Col className="text-left">
+              <input
+                className="form-control min-input d-inline"
+                value={this.state.time}
+                onChange={this.onTimeChange}
+                name="time"
+              />
+              <label className="mx-4 h5">Min</label>
+            </Col>
+          </Row>
+
           <p>Start each new turn automatically?</p>
-          <input
-            onChange={this.onAutoStartChange}
-            name="autostart"
-            type="checkbox"
-            style={{ backgroundColor: "green" }}
-          />
-          <label>Yes/No</label>
+
+          <Row className="my-3">
+            <Col>
+              <div class="pretty p-switch p-fill">
+                <input onChange={this.onAutoStartChange} type="checkbox" />
+                <div class="state">
+                  <label>{auto}</label>
+                </div>
+              </div>
+            </Col>
+          </Row>
+
           <div>
-            <button onClick={this.handleSubmit}>Finish</button>
+            <button
+              className="btn-default round btn-block b1"
+              onClick={this.handleSubmit}
+            >
+              Finish
+            </button>
           </div>
-        </div>
+        </Container>
       </form>
     );
   }

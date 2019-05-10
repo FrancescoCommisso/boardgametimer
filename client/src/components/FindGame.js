@@ -43,7 +43,7 @@ class FindGame extends Component {
     }
 
     return (
-      <div className="">
+      <div className="top sub">
         <form onSubmit={this.handleJoinGame}>
           <h2>Find Game</h2>
           <p>
@@ -51,17 +51,14 @@ class FindGame extends Component {
             Game-ID here
           </p>
           <input
-            className="text-center btn-block"
+            className="text-center form-control"
             onChange={this.handleIDChange}
             placeholder="XXXXX"
           />
 
           {error}
 
-          <button
-            className="btn-block bg-warning"
-            onClick={this.handleJoinGame}
-          >
+          <button className="btn-block b2" onClick={this.handleJoinGame}>
             Join Game
           </button>
         </form>

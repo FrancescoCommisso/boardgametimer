@@ -1,0 +1,59 @@
+.title {
+  font-size: 50px;
+  color: white;
+  font-weight: 400;
+}
+
+.top {
+  margin-top: 50px;
+}
+
+.sub {
+  color: white;
+  font-weight: 200;
+}
+
+.player-input {
+}
+
+.min-input {
+  text-align: center;
+  max-width: 60px;
+}
+
+.b1 {
+  color: white;
+  border: none;
+  min-height: 50px;
+  border-radius: 10px;
+  background-color: #177e89;
+}
+
+.text-button {
+  background-color: transparent;
+  border: none;
+  color: #da3a34;
+}
+.huge {
+  font-size: 70px;
+  color: #ffc857;
+}
+
+.b2 {
+  color: white;
+  border: none;
+  min-height: 50px;
+  border-radius: 10px;
+  background-color: #084c61;
+}
+
+.pause {
+  background-color: #ffc857;
+}
+
+.end {
+  background-color: #da3a34;
+}
+
+.restart {
+}

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Container, Col, Row } from "react-bootstrap";
 const pretty = require("pretty-ms");
 const Sound = require("react-sound").default;
 const missileSound = require("../assets/missile.mp3");
@@ -108,29 +109,51 @@ class Game extends Component {
   render() {
     if (this.state.gameState) {
       return (
-        <div className="text-center ">
+        <Container className="text-center top sub">
           <Sound url={chirp} playbackRate={4} playStatus={this.playsound()} />
-          <h1>{this.state.id}</h1>
-          <h2>{this.state.gameState.currentPlayer}'s Turn</h2>
-          <h3>
-            Time Remaining: {pretty(this.state.gameState.remainingTimeForTurn)}{" "}
-          </h3>
-          <h5>Total Time: {this.state.totalTime}</h5>
-          <h5>Turn#: {this.state.gameState.totalTurns}</h5>
-          <button className="btn-block" onClick={this.handlePause}>
-            {this.determinePaused()}
-          </button>
-          <button
-            className="btn-block"
-            style={{ height: "90px" }}
-            onClick={this.handleEndTurn}
-          >
-            End Turn
-          </button>
-          <button className="btn-block" onClick={this.handleRestart}>
-            Restart Turn
-          </button>
-        </div>
+
+          <Row className="">
+            <Col className="text-left align-top">
+              <h1 className="text-button ">{this.state.id}</h1>
+            </Col>
+            <Col className="text-right align-top">
+              <h3> {this.state.totalTime}</h3>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col>
+              <h1>{this.state.gameState.currentPlayer}</h1>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col className="align-center">
+              <h1 className="huge">
+                {pretty(this.state.gameState.remainingTimeForTurn)}
+              </h1>
+            </Col>
+          </Row>
+
+          <h5>Turn: {this.state.gameState.totalTurns}</h5>
+          <Row className="my-3">
+            <Col>
+              <button className="btn-block b1 " onClick={this.handlePause}>
+                {this.determinePaused()}
+              </button>
+            </Col>
+            <Col>
+              <button className="btn-block b1" onClick={this.handleEndTurn}>
+                End Turn
+              </button>
+            </Col>
+            <Col>
+              <button className="btn-block b1" onClick={this.handleRestart}>
+                Restart Turn
+              </button>
+            </Col>
+          </Row>
+        </Container>
       );
     } else {
       return <div>That Game-ID is no longer valid</div>;

@@ -3,6 +3,7 @@ import AddPlayers from "./AddPlayers";
 import AddSettings from "./AddSettings";
 import FindGame from "./FindGame";
 import { Button } from "react-bootstrap";
+import "./Main.css";
 
 class CreateGame extends Component {
   state = {
@@ -59,15 +60,18 @@ class CreateGame extends Component {
   render() {
     if (this.state.id === null) {
       return (
-        <div className="">
+        <div className="sub top">
           <h2 className="">Create Game</h2>
           <p>Here is your Game-ID</p>
-          <h1 className="text-center">{this.state.new_id}</h1>
+          <h1 className="text-button text-center my-3">{this.state.new_id}</h1>
           <p>
             Others can use it to access this game session from their device!
           </p>
 
-          <button className="bg-info btn-block" onClick={this.handleOnCreate}>
+          <button
+            className="bg-info btn-block b1"
+            onClick={this.handleOnCreate}
+          >
             Create New Game
           </button>
 
