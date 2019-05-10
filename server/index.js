@@ -11,7 +11,7 @@ app.use(pino);
 
 if (process.env.NODE_ENV === 'production') {
   // Exprees will serve up production assets
-  app.use(express.static('client/build'));
+  app.use(express.static('../client/build'));
 
   // Express serve up index.html file if it doesn't recognize route
   const path = require('path');
