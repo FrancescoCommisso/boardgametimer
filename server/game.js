@@ -26,7 +26,7 @@ class Game {
 
     this.endTurn = function() {
       var current = this.players.indexOf(this.gameState.currentPlayer);
-      var next = (current + 1) % 4;
+      var next = (current + 1) % this.players.length;
       this.gameState.currentPlayer = this.players[next];
       this.gameState.totalTurns += 1;
       this.gameState.remainingTimeForTurn = this.gameSettings.time;
