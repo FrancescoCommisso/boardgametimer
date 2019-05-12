@@ -20,17 +20,21 @@ class AddPlayers extends Component {
   };
 
   newPlayer = () => {
-    let p = this.state.players;
-    let q = p + 1;
-    this.setState({ players: q });
+    if (this.state.players < 10) {
+      let p = this.state.players;
+      let q = p + 1;
+      this.setState({ players: q });
+    }
   };
 
   removePlayer = () => {
-    let p = this.state.players;
-    let q = p - 1;
-    let n = this.state.names;
-    n.pop();
-    this.setState({ players: q, names: n });
+    if (this.state.players > 1) {
+      let p = this.state.players;
+      let q = p - 1;
+      let n = this.state.names;
+      n.pop();
+      this.setState({ players: q, names: n });
+    }
   };
 
   createInputs = () => {
@@ -38,12 +42,12 @@ class AddPlayers extends Component {
 
     for (let i = this.state.players; i > 0; i--) {
       inputs.push(
-        <Row>
+        <Row key={i}>
           <Col>
             <input
               className="form-control my-1"
               name={i}
-              placeholder={`p${i}`}
+              placeholder={`Player ${i}`}
               onChange={this.handlechange}
             />
           </Col>

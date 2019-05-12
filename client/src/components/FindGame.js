@@ -53,7 +53,7 @@ class FindGame extends Component {
           <input
             className="text-center form-control"
             onChange={this.handleIDChange}
-            placeholder="XXXXX"
+            placeholder="AbC123"
           />
 
           {error}

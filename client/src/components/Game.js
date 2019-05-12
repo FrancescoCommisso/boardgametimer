@@ -7,6 +7,7 @@ const missileSound = require("../assets/missile.mp3");
 const finishSound = require("../assets/foghorn.mp3");
 const bell = require("../assets/bell.mp3");
 const chirp = require("../assets/chirp.mp3");
+const broken = require("../assets/broken.svg");
 
 class Game extends Component {
   constructor(props) {
@@ -115,12 +116,12 @@ class Game extends Component {
 
           <Row className="">
             <Col className="text-left align-top">
-              <h2>Game-ID</h2>
-              <h4 className="text-button ">{this.state.id}</h4>
+              <h3>Game-ID</h3>
+              <p className="text-button ">{this.state.id}</p>
             </Col>
             <Col className="text-right align-top">
-              <h2>Total Time</h2>
-              <h3> {this.state.totalTime}</h3>
+              <h3>Total Time</h3>
+              <p> {this.state.totalTime}</p>
             </Col>
           </Row>
 
@@ -161,8 +162,18 @@ class Game extends Component {
     } else {
       return (
         <div className="top sub">
-          <h1>Something Broke...</h1>
-          <h4>Refresh the page or check the Game-ID</h4>
+          <h2>Something Aint Right...</h2>
+          <p>Refresh the page or check the Game-ID</p>
+          <Row>
+            <Col className="text-center">
+              <img
+                src={broken}
+                style={{ maxWidth: "200px" }}
+                className="img-fluid "
+                alt="Responsive Image"
+              />
+            </Col>
+          </Row>
         </div>
       );
     }

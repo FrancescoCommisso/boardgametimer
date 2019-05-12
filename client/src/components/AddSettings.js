@@ -36,6 +36,7 @@ class AddSettings extends Component {
                 className="form-control min-input d-inline"
                 value={this.state.time}
                 onChange={this.onTimeChange}
+                type="number"
                 name="time"
               />
               <label className="mx-4 h5">Min</label>
@@ -46,13 +47,13 @@ class AddSettings extends Component {
 
           <Row className="my-3">
             <Col>
-              <div class="pretty p-switch p-fill">
+              <div className="pretty p-switch p-fill">
                 <input
                   defaultChecked={this.state.autoStart}
                   onChange={this.onAutoStartChange}
                   type="checkbox"
                 />
-                <div class="state">
+                <div className="state">
                   <label>{auto}</label>
                 </div>
               </div>

@@ -21,25 +21,22 @@ class Description extends Component {
   };
 
   render() {
-    let desc = (
-      <p className="sub">
-        Ever been stuck in a situation in which one static timer just doesn't
-        cut it? Well look no further, my friend, as I present to you the Board
-        Game Timer! Create a timer that can be viewed and munipulated by each
-        and every player in your party. No more forgetting to stop/start
-        subsequent turns, and no more having to tediously pass someone's phone
-        around the table. Create one timer that can be viewed and manipulated
-        from anyones device.
-      </p>
-    );
+    let desc;
 
-    return (
-      <Container className="sub top">
-        <h2 className="">Board Game Timer</h2>
-        <p className="text-white">Because normal timers are boring</p>
-
-        {this.state.more && desc}
-
+    if (this.state.more) {
+      desc = (
+        <p className="sub">
+          Ever been stuck in a situation in which one static timer just doesn't
+          cut it? Well look no further, my friend, as I present to you the Board
+          Game Timer! Create a timer that can be viewed and munipulated by each
+          and every player in your party. No more forgetting to stop/start
+          subsequent turns, and no more having to tediously pass someone's phone
+          around the table. Create one timer that can be viewed and manipulated
+          from anyones device.
+        </p>
+      );
+    } else {
+      desc = (
         <Row className=" my-5">
           <Col className="text-center">
             <img
@@ -50,6 +47,16 @@ class Description extends Component {
             />
           </Col>
         </Row>
+      );
+    }
+
+    return (
+      <Container className="sub top">
+        <h2 className="">Board Game Timer</h2>
+        <p className="text-white">Because normal timers are boring</p>
+
+        {desc}
+
         <button className="text-button my-2" onClick={this.learnMore}>
           Learn More
         </button>
