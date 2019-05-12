@@ -25,19 +25,29 @@ class AddPlayers extends Component {
     this.setState({ players: q });
   };
 
+  removePlayer = () => {
+    let p = this.state.players;
+    let q = p - 1;
+    let n = this.state.names;
+    n.pop();
+    this.setState({ players: q, names: n });
+  };
+
   createInputs = () => {
     let inputs = [];
 
     for (let i = this.state.players; i > 0; i--) {
       inputs.push(
-        <div>
-          <input
-            className="form-control my-1"
-            name={i}
-            placeholder={`p${i}`}
-            onChange={this.handlechange}
-          />
-        </div>
+        <Row>
+          <Col>
+            <input
+              className="form-control my-1"
+              name={i}
+              placeholder={`p${i}`}
+              onChange={this.handlechange}
+            />
+          </Col>
+        </Row>
       );
     }
     return inputs.reverse();
@@ -60,6 +70,16 @@ class AddPlayers extends Component {
                   onClick={this.newPlayer}
                 >
                   New Player
+                </button>
+              </Col>
+              <Col>
+                <button
+                  type="button"
+                  className="btn-block b-new-player my-2"
+                  style={{ background: "#da3a34" }}
+                  onClick={this.removePlayer}
+                >
+                  Remove Player
                 </button>
               </Col>
             </Row>

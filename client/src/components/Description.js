@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import "./Main.css";
+const landingIcon = require("../assets/landingicon.svg");
 class Description extends Component {
   state = { more: false };
   handleFindGame = () => {
@@ -33,17 +34,27 @@ class Description extends Component {
     );
 
     return (
-      <Container className="top">
-        <h1 className="title">Board Game Timer</h1>
-        <h4 className="text-white">Because normal timers are boring</h4>
+      <Container className="sub top">
+        <h2 className="">Board Game Timer</h2>
+        <p className="text-white">Because normal timers are boring</p>
 
         {this.state.more && desc}
 
+        <Row className=" my-5">
+          <Col className="text-center">
+            <img
+              src={landingIcon}
+              style={{ maxWidth: "300px" }}
+              className="img-fluid "
+              alt="Responsive Image"
+            />
+          </Col>
+        </Row>
         <button className="text-button my-2" onClick={this.learnMore}>
           Learn More
         </button>
 
-        <Row>
+        <Row className="">
           <Col>
             <button onClick={this.handleNewGame} className="btn-block b1 ">
               New Game

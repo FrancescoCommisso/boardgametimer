@@ -115,9 +115,11 @@ class Game extends Component {
 
           <Row className="">
             <Col className="text-left align-top">
-              <h1 className="text-button ">{this.state.id}</h1>
+              <h2>Game-ID</h2>
+              <h4 className="text-button ">{this.state.id}</h4>
             </Col>
             <Col className="text-right align-top">
+              <h2>Total Time</h2>
               <h3> {this.state.totalTime}</h3>
             </Col>
           </Row>
@@ -136,7 +138,7 @@ class Game extends Component {
             </Col>
           </Row>
 
-          <h5>Turn: {this.state.gameState.totalTurns}</h5>
+          <p>Turn: {this.state.gameState.totalTurns}</p>
           <Row className="my-3">
             <Col>
               <button className="btn-block b1 " onClick={this.handlePause}>
