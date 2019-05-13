@@ -12,7 +12,6 @@ class Description extends Component {
   };
 
   learnMore = () => {
-    console.log("clickclick");
     if (this.state.more) {
       this.setState({ more: false });
     } else {
@@ -41,8 +40,7 @@ class Description extends Component {
           <Col className="text-center">
             <img
               src={landingIcon}
-              style={{ maxWidth: "400px" }}
-              className="img-fluid "
+              className="img-fluid landingicon "
               alt="Responsive Image"
             />
           </Col>
@@ -55,16 +53,7 @@ class Description extends Component {
         <h2 className="">Board Game Timer</h2>
         <p className="text-white">Because normal timers are boring</p>
 
-        {/* {desc} */}
-        <Row className=" ">
-          <Col className="text-center my-4">
-            <img
-              src={landingIcon}
-              className="img-fluid landingicon "
-              alt="Responsive Image"
-            />
-          </Col>
-        </Row>
+        {desc}
 
         <button className="text-button my-2" onClick={this.learnMore}>
           Learn More
