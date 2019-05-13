@@ -56,7 +56,6 @@ app.post("/api/game", (req, res) => {
       res.sendStatus(404);
     }
   } catch (e) {
-    console.log(e.message);
     res.sendStatus(404);
   }
 });
@@ -70,7 +69,6 @@ app.post("/api/input/pause", (req, res) => {
   res.send(JSON.stringify(games[req.body.id]));
 });
 app.post("/api/input/restart", (req, res) => {
-  pwd;
   games[req.body.id].restartTurn();
   res.send(JSON.stringify(games[req.body.id]));
 });
@@ -87,7 +85,7 @@ app.get("*", function(req, res) {
     }
   });
 });
-//
+
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log("Express server is running on localhost:3001");
