@@ -18,7 +18,6 @@ class TimerDisplay {
     if (min < 10) {
       min = "0" + min;
     }
-
     if (hour > 0) {
       return hour + ":" + min + ":" + sec;
     }

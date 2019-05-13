@@ -9,7 +9,7 @@ const bell = require("../assets/bell.mp3");
 const chirp = require("../assets/chirp.mp3");
 const broken = require("../assets/broken.svg");
 
-const TimerDisplay = require("../classes/TimerDisplay.js");
+const TimerDisplay = require("./classes/TimerDisplay.js");
 
 class Game extends Component {
   constructor(props) {
