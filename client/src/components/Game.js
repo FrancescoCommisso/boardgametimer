@@ -162,9 +162,9 @@ class Game extends Component {
     } else {
       return (
         <div className="top sub">
-          <h2>Something Aint Right...</h2>
+          <h2>Something Ain't Right...</h2>
           <p>Refresh the page or check the Game-ID</p>
-          <Row>
+          <Row className="my-5">
             <Col className="text-center">
               <img
                 src={broken}
