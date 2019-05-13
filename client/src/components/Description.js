@@ -55,7 +55,7 @@ class Description extends Component {
         <h2 className="">Board Game Timer</h2>
         <p className="text-white">Because normal timers are boring</p>
 
-        {desc}
+        {/* {desc}
 
         <button className="text-button my-2" onClick={this.learnMore}>
           Learn More
@@ -72,7 +72,7 @@ class Description extends Component {
               Find Existing Game
             </button>
           </Col>
-        </Row>
+        </Row> */}
       </Container>
     );
   }
