@@ -16,11 +16,11 @@
 .player-input {
 }
 
-@media screen and (max-width: 600px) {
+/* @media screen and (max-width: 600px) {
   .landingicon {
     max-width: 300px;
   }
-}
+} */
 
 .min-input {
   text-align: center;
