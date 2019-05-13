@@ -41,7 +41,7 @@ class Description extends Component {
           <Col className="text-center">
             <img
               src={landingIcon}
-              style={{ maxWidth: "300px" }}
+              style={{ maxWidth: "400px" }}
               className="img-fluid "
               alt="Responsive Image"
             />
@@ -55,7 +55,16 @@ class Description extends Component {
         <h2 className="">Board Game Timer</h2>
         <p className="text-white">Because normal timers are boring</p>
 
-        {desc}
+        {/* {desc} */}
+        <Row className=" ">
+          <Col className="text-center my-4">
+            <img
+              src={landingIcon}
+              className="img-fluid landingicon "
+              alt="Responsive Image"
+            />
+          </Col>
+        </Row>
 
         <button className="text-button my-2" onClick={this.learnMore}>
           Learn More

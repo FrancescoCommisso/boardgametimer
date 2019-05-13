@@ -9,6 +9,8 @@ const bell = require("../assets/bell.mp3");
 const chirp = require("../assets/chirp.mp3");
 const broken = require("../assets/broken.svg");
 
+const TimerDisplay = require("../classes/TimerDisplay.js");
+
 class Game extends Component {
   constructor(props) {
     super(props);
@@ -25,14 +27,14 @@ class Game extends Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(this.state)
-    }).then(res => this.checkResponse(res));
+    }).then(res => {
+      if (res.status === 200) {
+        res.json().then(state => this.setState(state, this.calcTotalTime()));
+      } else {
+        console.log("server error");
+      }
+    });
   }
-
-  checkResponse = res => {
-    if (res.status === 200) {
-      res.json().then(state => this.setState(state, this.calcTotalTime()));
-    }
-  };
 
   calcTotalTime = () => {
     this.interval = setInterval(() => {
@@ -69,7 +71,7 @@ class Game extends Component {
       body: JSON.stringify({ id: this.state.id })
     })
       .then(response => response.json())
-      .then(state => this.setState({ gameState: state }));
+      .then(state => this.setState({ gameState: state }, () => {}));
   };
 
   handlePause = () => {
@@ -108,6 +110,11 @@ class Game extends Component {
     }
   };
 
+  displayTime = () => {
+    let t = new TimerDisplay(this.state.gameState.remainingTimeForTurn);
+    return t.calcDisplayTime();
+  };
+
   render() {
     if (this.state.gameState) {
       return (
@@ -133,9 +140,7 @@ class Game extends Component {
 
           <Row>
             <Col className="align-center">
-              <h1 className="huge">
-                {pretty(this.state.gameState.remainingTimeForTurn)}
-              </h1>
+              <h1 className="huge">{this.displayTime()}</h1>
             </Col>
           </Row>
 

@@ -56,6 +56,7 @@ app.post("/api/game", (req, res) => {
       res.sendStatus(404);
     }
   } catch (e) {
+    console.log(e.message);
     res.sendStatus(404);
   }
 });
