@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import "./Main.css";
 const landingIcon = require("../assets/landingicon.svg");
+
+//
 class Description extends Component {
   state = { more: false };
   handleFindGame = () => {
