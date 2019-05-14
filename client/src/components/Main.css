@@ -26,9 +26,10 @@
   .landingicon {
     max-width: 300px;
   }
-  .huge {
-    font-size: 40px;
-  }
+}
+
+.play-btn {
+  max-width: 35px;
 }
 
 .min-input {

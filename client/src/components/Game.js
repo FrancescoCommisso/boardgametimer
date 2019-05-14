@@ -8,7 +8,9 @@ const missileSound = require("../assets/missile.mp3");
 const finishSound = require("../assets/foghorn.mp3");
 const bell = require("../assets/bell.mp3");
 const chirp = require("../assets/chirp.mp3");
-
+const broken = require("../assets/broken.svg");
+const pause = require("../assets/pause.svg");
+const play = require("../assets/play.svg");
 class Game extends Component {
   constructor(props) {
     super(props);
@@ -140,7 +142,7 @@ class Game extends Component {
           <h5>Turn: {this.state.gameState.totalTurns}</h5>
           <Row className="my-3">
             <Col>
-              <button className="btn-block b1 " onClick={this.handlePause}>
+              <button className="btn-block b1" onClick={this.handlePause}>
                 {this.determinePaused()}
               </button>
             </Col>
@@ -158,7 +160,22 @@ class Game extends Component {
         </Container>
       );
     } else {
-      return <div>That Game-ID is no longer valid</div>;
+      return (
+        <div className="top sub">
+          <h2>Something Ain't Right...</h2>
+          <p>Refresh the page or check the Game-ID</p>
+          <Row className="my-5">
+            <Col className="text-center">
+              <img
+                src={broken}
+                style={{ maxWidth: "200px" }}
+                className="img-fluid "
+                alt="Responsive Image"
+              />
+            </Col>
+          </Row>
+        </div>
+      );
     }
   }
 }
