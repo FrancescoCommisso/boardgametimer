@@ -7,7 +7,7 @@ const finishSound = require("../assets/foghorn.mp3");
 const bell = require("../assets/bell.mp3");
 const chirp = require("../assets/chirp.mp3");
 
-const TimerDisplay = require("./classes/TimerDisplay.js");
+// const TimerDisplay = require("./classes/TimerDisplay.js");
 
 class Game extends Component {
   constructor(props) {
@@ -108,13 +108,7 @@ class Game extends Component {
     }
   };
 
-  determinePaused = () => {
-    if (this.state.gameState.paused) {
-      return "Un-Pause";
-    } else {
-      return "Pause";
-    }
-  };
+  displayTime = () => {};
 
   render() {
     if (this.state.gameState) {
