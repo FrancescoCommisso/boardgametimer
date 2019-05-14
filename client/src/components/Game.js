@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { Container, Col, Row } from "react-bootstrap";
+import Timer from "./Timer";
+
 const pretty = require("pretty-ms");
 const Sound = require("react-sound").default;
 const missileSound = require("../assets/missile.mp3");
 const finishSound = require("../assets/foghorn.mp3");
 const bell = require("../assets/bell.mp3");
 const chirp = require("../assets/chirp.mp3");
-
-const TimerDisplay = require("./TimerDisplay.js");
 
 class Game extends Component {
   constructor(props) {
@@ -108,11 +108,6 @@ class Game extends Component {
     }
   };
 
-  displayTime = () => {
-    let t = new TimerDisplay(this.state.gameState.remainingTimeForTurn);
-    return t.calcDisplayTime();
-  };
-
   render() {
     if (this.state.gameState) {
       return (
@@ -121,10 +116,12 @@ class Game extends Component {
 
           <Row className="">
             <Col className="text-left align-top">
-              <h1 className="text-button ">{this.state.id}</h1>
+              <h3>Game-ID</h3>
+              <p className="text-button ">{this.state.id}</p>
             </Col>
             <Col className="text-right align-top">
-              <h3> {this.state.totalTime}</h3>
+              <h3>Total Time</h3>
+              <p> {this.state.totalTime}</p>
             </Col>
           </Row>
 
@@ -136,7 +133,7 @@ class Game extends Component {
 
           <Row>
             <Col className="align-center">
-              <h1 className="huge">{this.displayTime()}</h1>
+              <Timer millis={this.state.gameState.remainingTimeForTurn} />
             </Col>
           </Row>
 
