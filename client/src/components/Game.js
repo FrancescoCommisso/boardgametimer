@@ -31,9 +31,11 @@ class Game extends Component {
   }
 
   checkResponse = res => {
-    // if (res.status === 200) {
-    res.json().then(state => this.setState(state, this.calcTotalTime()));
-    // }
+    if (res.status === 200) {
+      res.json().then(state => this.setState(state, this.calcTotalTime()));
+    } else {
+      this.componentDidMount();
+    }
   };
 
   calcTotalTime = () => {
