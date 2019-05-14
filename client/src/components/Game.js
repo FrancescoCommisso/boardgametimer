@@ -107,6 +107,8 @@ class Game extends Component {
   playsound = () => {
     if (this.state.gameState.remainingTimeForTurn == 0) {
       return Sound.status.PLAYING;
+    } else {
+      return Sound.status.STOPPED;
     }
   };
 

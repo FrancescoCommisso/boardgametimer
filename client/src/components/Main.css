@@ -13,14 +13,23 @@
   font-weight: 200;
 }
 
+.equal {
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+}
+
 .player-input {
 }
 
-/* @media screen and (max-width: 600px) {
+@media screen and (max-width: 600px) {
   .landingicon {
     max-width: 300px;
   }
-} */
+  .huge {
+    font-size: 40px;
+  }
+}
 
 .min-input {
   text-align: center;

@@ -66,7 +66,7 @@ class AddPlayers extends Component {
         <form className="text-center block" onSubmit={this.handleSubmit}>
           <Container>
             {c}
-            <Row className="">
+            <Row className="row equal">
               <Col>
                 <button
                   type="button"
