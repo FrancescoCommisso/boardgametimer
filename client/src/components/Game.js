@@ -108,7 +108,10 @@ class Game extends Component {
     }
   };
 
-  displayTime = () => {};
+  displayTime = () => {
+    let t = new TimerDisplay(this.state.gameState.remainingTimeForTurn);
+    return t.calcDisplayTime();
+  };
 
   render() {
     if (this.state.gameState) {
