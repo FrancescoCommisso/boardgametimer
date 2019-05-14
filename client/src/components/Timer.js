@@ -31,7 +31,7 @@ class Timer extends Component {
   };
 
   render() {
-    return <h1>{this.calcDisplayTime()}</h1>;
+    return <h1 className="timer">{this.calcDisplayTime()}</h1>;
   }
 }
 

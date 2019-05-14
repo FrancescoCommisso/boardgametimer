@@ -38,7 +38,7 @@ class Game extends Component {
 
   calcTotalTime = () => {
     this.interval = setInterval(() => {
-      var elapsed = Date.now() - this.state.gameState.gameStartTime;
+      var elapsed = Math.abs(Date.now() - this.state.gameState.gameStartTime);
       this.setState({ totalTime: pretty(elapsed) });
       this.getRemainingTime();
     }, 100);
@@ -111,73 +111,127 @@ class Game extends Component {
   };
 
   render() {
-    if (this.state.gameState) {
-      return (
-        <Container className="text-center top sub">
-          <Sound url={chirp} playbackRate={4} playStatus={this.playsound()} />
+    return (
+      <div>
+        {this.state && this.state.gameState && (
+          <Container className="text-center top sub">
+            <Sound url={chirp} playbackRate={4} playStatus={this.playsound()} />
 
-          <Row className="">
-            <Col className="text-left align-top">
-              <h3>Game-ID</h3>
-              <p className="text-button ">{this.state.id}</p>
-            </Col>
-            <Col className="text-right align-top">
-              <h3>Total Time</h3>
-              <p> {this.state.totalTime}</p>
-            </Col>
-          </Row>
+            <Row className="">
+              <Col className="text-left align-top">
+                <h3>Game-ID</h3>
+                <p className="text-button ">{this.state.id}</p>
+              </Col>
+              <Col className="text-right align-top">
+                <h3>Total Time</h3>
+                <p> {this.state.totalTime}</p>
+              </Col>
+            </Row>
 
-          <Row>
-            <Col>
-              <h1>{this.state.gameState.currentPlayer}</h1>
-            </Col>
-          </Row>
+            <Row>
+              <Col>
+                <h1>{this.state.gameState.currentPlayer}</h1>
+              </Col>
+            </Row>
 
-          <Row>
-            <Col className="align-center">
-              <Timer millis={this.state.gameState.remainingTimeForTurn} />
-            </Col>
-          </Row>
+            <Row>
+              <Col className="align-center">
+                <Timer millis={this.state.gameState.remainingTimeForTurn} />
+              </Col>
+            </Row>
 
-          <h5>Turn: {this.state.gameState.totalTurns}</h5>
-          <Row className="my-3">
-            <Col>
-              <button className="btn-block b1" onClick={this.handlePause}>
-                {this.determinePaused()}
-              </button>
-            </Col>
-            <Col>
-              <button className="btn-block b1" onClick={this.handleEndTurn}>
-                End Turn
-              </button>
-            </Col>
-            <Col>
-              <button className="btn-block b1" onClick={this.handleRestart}>
-                Restart Turn
-              </button>
-            </Col>
-          </Row>
-        </Container>
-      );
-    } else {
-      return (
-        <div className="top sub">
-          <h2>Something Ain't Right...</h2>
-          <p>Refresh the page or check the Game-ID</p>
-          <Row className="my-5">
-            <Col className="text-center">
-              <img
-                src={broken}
-                style={{ maxWidth: "200px" }}
-                className="img-fluid "
-                alt="Responsive Image"
-              />
-            </Col>
-          </Row>
-        </div>
-      );
-    }
+            <h5>Turn: {this.state.gameState.totalTurns}</h5>
+            <Row className="my-3">
+              <Col>
+                <button className="btn-block b1" onClick={this.handlePause}>
+                  {this.determinePaused()}
+                </button>
+              </Col>
+              <Col>
+                <button className="btn-block b1" onClick={this.handleEndTurn}>
+                  End Turn
+                </button>
+              </Col>
+              <Col>
+                <button className="btn-block b1" onClick={this.handleRestart}>
+                  Restart Turn
+                </button>
+              </Col>
+            </Row>
+          </Container>
+        )}
+      </div>
+    );
   }
+
+  // render() {
+  //   if (this.state.gameState) {
+  //     return (
+  //       <Container className="text-center top sub">
+  //         <Sound url={chirp} playbackRate={4} playStatus={this.playsound()} />
+
+  //         <Row className="">
+  //           <Col className="text-left align-top">
+  //             <h3>Game-ID</h3>
+  //             <p className="text-button ">{this.state.id}</p>
+  //           </Col>
+  //           <Col className="text-right align-top">
+  //             <h3>Total Time</h3>
+  //             <p> {this.state.totalTime}</p>
+  //           </Col>
+  //         </Row>
+
+  //         <Row>
+  //           <Col>
+  //             <h1>{this.state.gameState.currentPlayer}</h1>
+  //           </Col>
+  //         </Row>
+
+  //         <Row>
+  //           <Col className="align-center">
+  //             <Timer millis={this.state.gameState.remainingTimeForTurn} />
+  //           </Col>
+  //         </Row>
+
+  //         <h5>Turn: {this.state.gameState.totalTurns}</h5>
+  //         <Row className="my-3">
+  //           <Col>
+  //             <button className="btn-block b1" onClick={this.handlePause}>
+  //               {this.determinePaused()}
+  //             </button>
+  //           </Col>
+  //           <Col>
+  //             <button className="btn-block b1" onClick={this.handleEndTurn}>
+  //               End Turn
+  //             </button>
+  //           </Col>
+  //           <Col>
+  //             <button className="btn-block b1" onClick={this.handleRestart}>
+  //               Restart Turn
+  //             </button>
+  //           </Col>
+  //         </Row>
+  //       </Container>
+  //     );
+  //   } else {
+  //     return (
+  //       <div className="top sub">
+  //         <h2>Something Ain't Right...</h2>
+  //         <p>Refresh the page or check the Game-ID</p>
+  //         <Row className="my-5">
+  //           <Col className="text-center">
+  //             <img
+  //               src={broken}
+  //               style={{ maxWidth: "200px" }}
+  //               className="img-fluid "
+  //               alt="Responsive Image"
+  //             />
+  //           </Col>
+  //         </Row>
+  //       </div>
+  //     );
+  //   }
+  // }
 }
 
 export default Game;

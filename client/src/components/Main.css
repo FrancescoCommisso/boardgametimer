@@ -26,6 +26,13 @@
   .landingicon {
     max-width: 300px;
   }
+  .timer {
+    font-size: 20em;
+  }
+}
+
+.timer {
+  font-size: 70px;
 }
 
 .play-btn {
