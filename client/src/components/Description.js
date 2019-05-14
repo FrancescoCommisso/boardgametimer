@@ -45,15 +45,16 @@ class Description extends Component {
               className="img-fluid landingicon "
               alt="Responsive Image"
             />
+            //
           </Col>
         </Row>
       );
     }
 
     return (
-      <Container className="sub top">
-        <h2 className="">Board Game Timer</h2>
-        <p className="text-white">Because normal timers are boring</p>
+      <Container className=" top">
+        <h1 className="title">Cloud Timer</h1>
+        <h4 className="slogan">Better Than The One In Your Phone</h4>
 
         {desc}
 
