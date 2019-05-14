@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Container, Col, Row } from "react-bootstrap";
 import Timer from "./Timer";
+import Error from "./Error";
 
 const pretty = require("pretty-ms");
 const Sound = require("react-sound").default;
@@ -8,7 +9,7 @@ const missileSound = require("../assets/missile.mp3");
 const finishSound = require("../assets/foghorn.mp3");
 const bell = require("../assets/bell.mp3");
 const chirp = require("../assets/chirp.mp3");
-const broken = require("../assets/broken.svg");
+
 const pause = require("../assets/pause.svg");
 const play = require("../assets/play.svg");
 class Game extends Component {
@@ -162,22 +163,7 @@ class Game extends Component {
         </Container>
       );
     } else {
-      return (
-        <div className="top sub">
-          <h2>Something Ain't Right...</h2>
-          <p>Refresh the page or check the Game-ID</p>
-          <Row className="my-5">
-            <Col className="text-center">
-              <img
-                src={broken}
-                style={{ maxWidth: "200px" }}
-                className="img-fluid "
-                alt="Responsive Image"
-              />
-            </Col>
-          </Row>
-        </div>
-      );
+      return <div />;
     }
   }
 }
