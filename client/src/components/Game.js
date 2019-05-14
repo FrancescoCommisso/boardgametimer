@@ -2,14 +2,10 @@ import React, { Component } from "react";
 import { Container, Col, Row } from "react-bootstrap";
 const pretty = require("pretty-ms");
 const Sound = require("react-sound").default;
-const toneSound = require("../assets/tone.mp3");
 const missileSound = require("../assets/missile.mp3");
 const finishSound = require("../assets/foghorn.mp3");
 const bell = require("../assets/bell.mp3");
 const chirp = require("../assets/chirp.mp3");
-const broken = require("../assets/broken.svg");
-
-const TimerDisplay = require("./classes/TimerDisplay.js");
 
 class Game extends Component {
   constructor(props) {
@@ -27,18 +23,18 @@ class Game extends Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(this.state)
-    }).then(res => {
-      if (res.status === 200) {
-        res.json().then(state => this.setState(state, this.calcTotalTime()));
-      } else {
-        console.log("server error");
-      }
-    });
+    }).then(res => this.checkResponse(res));
   }
+
+  checkResponse = res => {
+    if (res.status === 200) {
+      res.json().then(state => this.setState(state, this.calcTotalTime()));
+    }
+  };
 
   calcTotalTime = () => {
     this.interval = setInterval(() => {
-      var elapsed = Math.abs(Date.now() - this.state.gameState.gameStartTime);
+      var elapsed = Date.now() - this.state.gameState.gameStartTime;
       this.setState({ totalTime: pretty(elapsed) });
       this.getRemainingTime();
     }, 100);
@@ -71,7 +67,7 @@ class Game extends Component {
       body: JSON.stringify({ id: this.state.id })
     })
       .then(response => response.json())
-      .then(state => this.setState({ gameState: state }, () => {}));
+      .then(state => this.setState({ gameState: state }));
   };
 
   handlePause = () => {
@@ -107,14 +103,7 @@ class Game extends Component {
   playsound = () => {
     if (this.state.gameState.remainingTimeForTurn == 0) {
       return Sound.status.PLAYING;
-    } else {
-      return Sound.status.STOPPED;
     }
-  };
-
-  displayTime = () => {
-    let t = new TimerDisplay(this.state.gameState.remainingTimeForTurn);
-    return t.calcDisplayTime();
   };
 
   render() {
@@ -125,12 +114,10 @@ class Game extends Component {
 
           <Row className="">
             <Col className="text-left align-top">
-              <h3>Game-ID</h3>
-              <p className="text-button ">{this.state.id}</p>
+              <h1 className="text-button ">{this.state.id}</h1>
             </Col>
             <Col className="text-right align-top">
-              <h3>Total Time</h3>
-              <p> {this.state.totalTime}</p>
+              <h3> {this.state.totalTime}</h3>
             </Col>
           </Row>
 
@@ -142,11 +129,13 @@ class Game extends Component {
 
           <Row>
             <Col className="align-center">
-              <h1 className="huge">{this.displayTime()}</h1>
+              <h1 className="huge">
+                {pretty(this.state.gameState.remainingTimeForTurn)}
+              </h1>
             </Col>
           </Row>
 
-          <p>Turn: {this.state.gameState.totalTurns}</p>
+          <h5>Turn: {this.state.gameState.totalTurns}</h5>
           <Row className="my-3">
             <Col>
               <button className="btn-block b1 " onClick={this.handlePause}>
@@ -167,22 +156,7 @@ class Game extends Component {
         </Container>
       );
     } else {
-      return (
-        <div className="top sub">
-          <h2>Something Ain't Right...</h2>
-          <p>Refresh the page or check the Game-ID</p>
-          <Row className="my-5">
-            <Col className="text-center">
-              <img
-                src={broken}
-                style={{ maxWidth: "200px" }}
-                className="img-fluid "
-                alt="Responsive Image"
-              />
-            </Col>
-          </Row>
-        </div>
-      );
+      return <div>That Game-ID is no longer valid</div>;
     }
   }
 }
