@@ -47,7 +47,7 @@ class AddPlayers extends Component {
             <input
               className="form-control my-1"
               name={i}
-              placeholder={`Player ${i}`}
+              placeholder={`Participant ${i}`}
               onChange={this.handlechange}
             />
           </Col>
@@ -61,8 +61,8 @@ class AddPlayers extends Component {
     let c = this.createInputs();
     return (
       <div className="top sub">
-        <h2>Add Players</h2>
-        <p>Enter each player's name</p>
+        <h2>Add Particpant</h2>
+        <p>Enter each particpant's name</p>
         <form className="text-center block" onSubmit={this.handleSubmit}>
           <Container>
             {c}

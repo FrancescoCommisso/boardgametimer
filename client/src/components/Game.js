@@ -121,7 +121,7 @@ class Game extends Component {
 
           <Row className="">
             <Col className="text-left align-top">
-              <h3>Game-ID</h3>
+              <h3>Timer-ID</h3>
               <p className="text-button ">{this.state.id}</p>
             </Col>
             <Col className="text-right align-top">

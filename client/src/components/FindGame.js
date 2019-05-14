@@ -45,10 +45,10 @@ class FindGame extends Component {
     return (
       <div className="top sub">
         <form onSubmit={this.handleJoinGame}>
-          <h2>Find Game</h2>
+          <h2>Find Timer</h2>
           <p>
-            If a member of your party has already created a game, enter the
-            Game-ID here
+            If a member of your party has already created a timer, enter the
+            Timer-ID here
           </p>
           <input
             className="text-center form-control"
@@ -59,7 +59,7 @@ class FindGame extends Component {
           {error}
 
           <button className="btn-block b2" onClick={this.handleJoinGame}>
-            Join Game
+            Join Timer
           </button>
         </form>
       </div>
