@@ -51,7 +51,7 @@ class Description extends Component {
     }
 
     return (
-      <Container className=" top">
+      <Container className=" ">
         <h1 className="title">Cloud Timer</h1>
         <h4 className="slogan">Better Than The One In Your Phone</h4>
 
