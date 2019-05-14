@@ -45,7 +45,6 @@ class Description extends Component {
               className="img-fluid landingicon "
               alt="Responsive Image"
             />
-            //
           </Col>
         </Row>
       );
