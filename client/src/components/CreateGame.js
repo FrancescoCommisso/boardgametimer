@@ -61,18 +61,16 @@ class CreateGame extends Component {
     if (this.state.id === null) {
       return (
         <div className="sub top">
-          <h2 className="">Create Game</h2>
-          <p>Here is your Game-ID</p>
+          <h2 className="">Create Timer</h2>
+          <p>Here is your Timer-ID</p>
           <h1 className="text-button text-center my-3">{this.state.new_id}</h1>
-          <p>
-            Others can use it to access this game session from their device!
-          </p>
+          <p>Others can use it to access this timer from their device!</p>
 
           <button
             className="bg-info btn-block b1"
             onClick={this.handleOnCreate}
           >
-            Create New Game
+            Create New Timer
           </button>
 
           <div className="col" />

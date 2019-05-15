@@ -1,21 +1,25 @@
 import React, { Component } from "react";
 import { Container, Col, Row } from "react-bootstrap";
+import Timer from "./Timer";
+import ReactNoSleep from "react-no-sleep";
+import Switch from "react-switch";
+import "pretty-checkbox/src/pretty-checkbox.scss";
+
 const pretty = require("pretty-ms");
 const Sound = require("react-sound").default;
-const toneSound = require("../assets/tone.mp3");
 const missileSound = require("../assets/missile.mp3");
 const finishSound = require("../assets/foghorn.mp3");
 const bell = require("../assets/bell.mp3");
 const chirp = require("../assets/chirp.mp3");
-const broken = require("../assets/broken.svg");
 
-const TimerDisplay = require("./classes/TimerDisplay.js");
-
+const pause = require("../assets/pause.svg");
+const play = require("../assets/play.svg");
 class Game extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.props.match.params.id
+      id: this.props.match.params.id,
+      preventSleep: true
     };
   }
 
@@ -27,14 +31,16 @@ class Game extends Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(this.state)
-    }).then(res => {
-      if (res.status === 200) {
-        res.json().then(state => this.setState(state, this.calcTotalTime()));
-      } else {
-        console.log("server error");
-      }
-    });
+    }).then(res => this.checkResponse(res));
   }
+
+  checkResponse = res => {
+    if (res.status === 200) {
+      res.json().then(state => this.setState(state, this.calcTotalTime()));
+    } else {
+      this.componentDidMount();
+    }
+  };
 
   calcTotalTime = () => {
     this.interval = setInterval(() => {
@@ -71,7 +77,7 @@ class Game extends Component {
       body: JSON.stringify({ id: this.state.id })
     })
       .then(response => response.json())
-      .then(state => this.setState({ gameState: state }, () => {}));
+      .then(state => this.setState({ gameState: state }));
   };
 
   handlePause = () => {
@@ -107,82 +113,95 @@ class Game extends Component {
   playsound = () => {
     if (this.state.gameState.remainingTimeForTurn == 0) {
       return Sound.status.PLAYING;
-    } else {
-      return Sound.status.STOPPED;
     }
   };
 
-  displayTime = () => {
-    let t = new TimerDisplay(this.state.gameState.remainingTimeForTurn);
-    return t.calcDisplayTime();
+  handleSleepChange = e => {
+    this.setState({ preventSleep: e.target.checked });
   };
 
   render() {
     if (this.state.gameState) {
       return (
-        <Container className="text-center top sub">
+        <Container className="text-center my-4 sub">
           <Sound url={chirp} playbackRate={4} playStatus={this.playsound()} />
 
-          <Row className="">
-            <Col className="text-left align-top">
-              <h3>Game-ID</h3>
+          <Row>
+            <Col className="text-left align-top ">
+              <h3>Timer-ID</h3>
               <p className="text-button ">{this.state.id}</p>
             </Col>
-            <Col className="text-right align-top">
+            <Col className="text-right align-top ">
               <h3>Total Time</h3>
               <p> {this.state.totalTime}</p>
             </Col>
           </Row>
 
-          <Row>
-            <Col>
-              <h1>{this.state.gameState.currentPlayer}</h1>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col className="align-center">
-              <h1 className="huge">{this.displayTime()}</h1>
-            </Col>
-          </Row>
-
-          <p>Turn: {this.state.gameState.totalTurns}</p>
           <Row className="my-3">
             <Col>
-              <button className="btn-block b1 " onClick={this.handlePause}>
+              <div className="border rounded">
+                <h1>{this.state.gameState.currentPlayer}</h1>
+                <Timer millis={this.state.gameState.remainingTimeForTurn} />
+                <h5>Turn: {this.state.gameState.totalTurns}</h5>
+              </div>
+            </Col>
+          </Row>
+
+          <Row className="my-2">
+            <Col>
+              <button className="btn-block b1" onClick={this.handlePause}>
                 {this.determinePaused()}
               </button>
             </Col>
-            <Col>
-              <button className="btn-block b1" onClick={this.handleEndTurn}>
-                End Turn
-              </button>
-            </Col>
+
             <Col>
               <button className="btn-block b1" onClick={this.handleRestart}>
                 Restart Turn
               </button>
             </Col>
           </Row>
+          <Row className="my-2 ">
+            <Col>
+              <button
+                className="btn-block b1 py-4"
+                onClick={this.handleEndTurn}
+              >
+                End Turn
+              </button>
+            </Col>
+          </Row>
+
+          <Row className="text-left my-5">
+            <Col className="">
+              <div className="py-3">
+                <ReactNoSleep>
+                  {({ isOn, enable, disable }) => (
+                    <div className="">
+                      <span className="align-baseline d-inline-block mx-2">
+                        <p className="d-inline-block text-left">
+                          Prevent Sleep
+                        </p>
+                      </span>
+                      <span className=" d-inline-block align-middle">
+                        <Switch
+                          className=""
+                          onColor="#ffc857"
+                          checkedIcon={false}
+                          uncheckedIcon={false}
+                          onChange={isOn ? disable : enable}
+                          checked={isOn}
+                        />
+                      </span>
+                    </div>
+                  )}
+                </ReactNoSleep>
+              </div>
+            </Col>
+          </Row>
         </Container>
       );
     } else {
-      return (
-        <div className="top sub">
-          <h2>Something Ain't Right...</h2>
-          <p>Refresh the page or check the Game-ID</p>
-          <Row className="my-5">
-            <Col className="text-center">
-              <img
-                src={broken}
-                style={{ maxWidth: "200px" }}
-                className="img-fluid "
-                alt="Responsive Image"
-              />
-            </Col>
-          </Row>
-        </div>
-      );
+      return <div />;
     }
   }
 }

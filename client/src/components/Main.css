@@ -1,7 +1,9 @@
 .title {
   font-size: 50px;
+
   color: white;
-  font-weight: 400;
+  font-weight: lighter;
+  font-weight: 500;
 }
 
 .top {
@@ -26,9 +28,23 @@
   .landingicon {
     max-width: 300px;
   }
-  .huge {
-    font-size: 40px;
+  .timer {
+    font-size: 20em;
   }
+}
+
+.slogan {
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.timer {
+  font-size: 70px;
+}
+
+.play-btn {
+  max-width: 35px;
 }
 
 .min-input {
