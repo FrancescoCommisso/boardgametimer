@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Container, Col, Row } from "react-bootstrap";
 import Timer from "./Timer";
 import ReactNoSleep from "react-no-sleep";
+import Switch from "react-switch";
+import "pretty-checkbox/src/pretty-checkbox.scss";
 
 const pretty = require("pretty-ms");
 const Sound = require("react-sound").default;
@@ -16,7 +18,8 @@ class Game extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.props.match.params.id
+      id: this.props.match.params.id,
+      preventSleep: true
     };
   }
 
@@ -113,63 +116,86 @@ class Game extends Component {
     }
   };
 
+  handleSleepChange = e => {
+    this.setState({ preventSleep: e.target.checked });
+  };
+
   render() {
     if (this.state.gameState) {
       return (
-        <Container className="text-center top sub">
+        <Container className="text-center my-4 sub">
           <Sound url={chirp} playbackRate={4} playStatus={this.playsound()} />
 
-          <ReactNoSleep>
-            {({ isOn, enable, disable }) => (
-              <Row>
-                <Col>
-                  <button className="b1" onClick={isOn ? disable : enable}>
-                    {isOn ? "on" : "off"}
-                  </button>
-                </Col>
-              </Row>
-            )}
-          </ReactNoSleep>
-
-          <Row className="">
-            <Col className="text-left align-top">
+          <Row>
+            <Col className="text-left align-top ">
               <h3>Timer-ID</h3>
               <p className="text-button ">{this.state.id}</p>
             </Col>
-            <Col className="text-right align-top">
+            <Col className="text-right align-top ">
               <h3>Total Time</h3>
               <p> {this.state.totalTime}</p>
             </Col>
           </Row>
 
-          <Row>
-            <Col>
-              <h1>{this.state.gameState.currentPlayer}</h1>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col className="align-center">
-              <Timer millis={this.state.gameState.remainingTimeForTurn} />
-            </Col>
-          </Row>
-
-          <h5>Turn: {this.state.gameState.totalTurns}</h5>
           <Row className="my-3">
+            <Col>
+              <div className="border rounded">
+                <h1>{this.state.gameState.currentPlayer}</h1>
+                <Timer millis={this.state.gameState.remainingTimeForTurn} />
+                <h5>Turn: {this.state.gameState.totalTurns}</h5>
+              </div>
+            </Col>
+          </Row>
+
+          <Row className="my-2">
             <Col>
               <button className="btn-block b1" onClick={this.handlePause}>
                 {this.determinePaused()}
               </button>
             </Col>
-            <Col>
-              <button className="btn-block b1" onClick={this.handleEndTurn}>
-                End Turn
-              </button>
-            </Col>
+
             <Col>
               <button className="btn-block b1" onClick={this.handleRestart}>
                 Restart Turn
               </button>
+            </Col>
+          </Row>
+          <Row className="my-2 ">
+            <Col>
+              <button
+                className="btn-block b1 py-4"
+                onClick={this.handleEndTurn}
+              >
+                End Turn
+              </button>
+            </Col>
+          </Row>
+
+          <Row className="text-left my-5">
+            <Col className="">
+              <div className="py-3">
+                <ReactNoSleep>
+                  {({ isOn, enable, disable }) => (
+                    <div className="">
+                      <span className="align-baseline d-inline-block mx-2">
+                        <p className="d-inline-block text-left">
+                          Prevent Sleep
+                        </p>
+                      </span>
+                      <span className=" d-inline-block align-middle">
+                        <Switch
+                          className=""
+                          onColor="#ffc857"
+                          checkedIcon={false}
+                          uncheckedIcon={false}
+                          onChange={isOn ? disable : enable}
+                          checked={isOn}
+                        />
+                      </span>
+                    </div>
+                  )}
+                </ReactNoSleep>
+              </div>
             </Col>
           </Row>
         </Container>
