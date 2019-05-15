@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Container, Col, Row } from "react-bootstrap";
 import Timer from "./Timer";
-import Error from "./Error";
+import ReactNoSleep from "react-no-sleep";
 
 const pretty = require("pretty-ms");
 const Sound = require("react-sound").default;
@@ -118,6 +118,18 @@ class Game extends Component {
       return (
         <Container className="text-center top sub">
           <Sound url={chirp} playbackRate={4} playStatus={this.playsound()} />
+
+          <ReactNoSleep>
+            {({ isOn, enable, disable }) => (
+              <Row>
+                <Col>
+                  <button className="b1" onClick={isOn ? disable : enable}>
+                    {isOn ? "on" : "off"}
+                  </button>
+                </Col>
+              </Row>
+            )}
+          </ReactNoSleep>
 
           <Row className="">
             <Col className="text-left align-top">
