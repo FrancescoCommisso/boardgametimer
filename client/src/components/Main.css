@@ -78,6 +78,12 @@
   /* color: #ffc857; */
 }
 
+.timer-div {
+  border: solid #177e89;
+  border-width: 8px;
+  border-radius: 7px;
+}
+
 .b2 {
   color: white;
   border: none;

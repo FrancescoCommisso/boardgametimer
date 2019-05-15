@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "pretty-checkbox/src/pretty-checkbox.scss";
 import "./Main.css";
+import Switch from "react-switch";
 import { Container, Row, Col } from "react-bootstrap";
 
 class AddSettings extends Component {
@@ -19,7 +20,7 @@ class AddSettings extends Component {
   };
 
   onAutoStartChange = e => {
-    this.setState({ autoStart: e.target.checked });
+    this.setState({ autoStart: e });
   };
 
   render() {
@@ -39,14 +40,14 @@ class AddSettings extends Component {
                 type="number"
                 name="time"
               />
-              <label className="mx-4 h5">Min</label>
+              <label className="mx-2 h5">Min</label>
             </Col>
           </Row>
 
           <p>Start each new turn automatically?</p>
 
           <Row className="my-3">
-            <Col>
+            {/* <Col>
               <div className="pretty p-switch p-fill">
                 <input
                   defaultChecked={this.state.autoStart}
@@ -57,6 +58,23 @@ class AddSettings extends Component {
                   <label>{auto}</label>
                 </div>
               </div>
+            </Col> */}
+
+            <Col>
+              <span className="d-inline-block">
+                <Switch
+                  className="align-middle"
+                  onColor="#ffc857"
+                  checkedIcon={false}
+                  uncheckedIcon={false}
+                  onChange={this.onAutoStartChange}
+                  checked={this.state.autoStart}
+                />
+              </span>
+
+              <span className="state d-inline-block">
+                <label className="align-baseline mx-2 h5">{auto}</label>
+              </span>
             </Col>
           </Row>
 

@@ -125,37 +125,35 @@ class Game extends Component {
       return (
         <Container className="text-center my-4 sub">
           <Sound url={chirp} playbackRate={4} playStatus={this.playsound()} />
-
           <Row>
             <Col className="text-left align-top ">
-              <h3>Timer-ID</h3>
-              <p className="text-button ">{this.state.id}</p>
+              <h5>Timer-ID</h5>
+              <h5 className="text-button ">{this.state.id}</h5>
             </Col>
             <Col className="text-right align-top ">
-              <h3>Total Time</h3>
+              <h5>Total Time</h5>
               <p> {this.state.totalTime}</p>
             </Col>
           </Row>
 
           <Row className="my-3">
             <Col>
-              <div className="border rounded">
+              <div className="timer-div">
                 <h1>{this.state.gameState.currentPlayer}</h1>
                 <Timer millis={this.state.gameState.remainingTimeForTurn} />
                 <h5>Turn: {this.state.gameState.totalTurns}</h5>
               </div>
             </Col>
           </Row>
-
           <Row className="my-2">
             <Col>
-              <button className="btn-block b1" onClick={this.handlePause}>
+              <button className="btn-block b2" onClick={this.handlePause}>
                 {this.determinePaused()}
               </button>
             </Col>
 
             <Col>
-              <button className="btn-block b1" onClick={this.handleRestart}>
+              <button className="btn-block b2" onClick={this.handleRestart}>
                 Restart Turn
               </button>
             </Col>
@@ -163,25 +161,19 @@ class Game extends Component {
           <Row className="my-2 ">
             <Col>
               <button
-                className="btn-block b1 py-4"
+                className="btn-block b2 py-4"
                 onClick={this.handleEndTurn}
               >
                 End Turn
               </button>
             </Col>
           </Row>
-
           <Row className="text-left my-5">
             <Col className="">
-              <div className="py-3">
+              <div className="py-1">
                 <ReactNoSleep>
                   {({ isOn, enable, disable }) => (
-                    <div className="">
-                      <span className="align-baseline d-inline-block mx-2">
-                        <p className="d-inline-block text-left">
-                          Prevent Sleep
-                        </p>
-                      </span>
+                    <div className="text-center">
                       <span className=" d-inline-block align-middle">
                         <Switch
                           className=""
@@ -192,6 +184,11 @@ class Game extends Component {
                           checked={isOn}
                         />
                       </span>
+                      <div className="align-baseline d-block mx-2">
+                        <p className="d-inline-block text-left">
+                          Keep Device Awake
+                        </p>
+                      </div>
                     </div>
                   )}
                 </ReactNoSleep>
