@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import "./Main.css";
+import Footer from "./footer";
 const landingIcon = require("../assets/landingicon.svg");
 
-//
 class Description extends Component {
   state = { more: false };
   handleFindGame = () => {
@@ -69,6 +69,11 @@ class Description extends Component {
             <button onClick={this.handleFindGame} className="btn-block b2">
               Find Existing Timer
             </button>
+          </Col>
+        </Row>
+        <Row>
+          <Col className="text-center my-4 sub">
+            <Footer />
           </Col>
         </Row>
       </Container>

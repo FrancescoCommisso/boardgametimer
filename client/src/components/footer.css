@@ -1,0 +1,22 @@
+.hob:hover {
+  filter: brightness(98%) hue-rotate(21deg) !important;
+}
+
+/* Set the background color of body to tan */
+/* .footimg {
+  font-size: 12px;
+} */
+
+/* On screens that are 992px or less, set the background color to blue */
+@media screen and (max-width: 992px) {
+  /* .footimg {
+    font-size: 12px;
+  } */
+}
+
+/* On screens that are 600px or less, set the background color to olive */
+@media screen and (max-width: 600px) {
+  .footimg {
+    font-size: 12px;
+  }
+}
