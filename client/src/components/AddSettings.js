@@ -47,19 +47,6 @@ class AddSettings extends Component {
           <p>Start each new turn automatically?</p>
 
           <Row className="my-3">
-            {/* <Col>
-              <div className="pretty p-switch p-fill">
-                <input
-                  defaultChecked={this.state.autoStart}
-                  onChange={this.onAutoStartChange}
-                  type="checkbox"
-                />
-                <div className="state">
-                  <label>{auto}</label>
-                </div>
-              </div>
-            </Col> */}
-
             <Col>
               <span className="d-inline-block">
                 <Switch

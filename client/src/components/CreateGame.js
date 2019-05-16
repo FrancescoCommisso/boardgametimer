@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import AddPlayers from "./AddPlayers";
 import AddSettings from "./AddSettings";
-import FindGame from "./FindGame";
-import { Button } from "react-bootstrap";
 import "./Main.css";
 
 class CreateGame extends Component {

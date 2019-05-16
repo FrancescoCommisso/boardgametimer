@@ -12,8 +12,6 @@ const finishSound = require("../assets/foghorn-trimmed.mp3");
 const bell = require("../assets/bell-trimmed.mp3");
 const chirp = require("../assets/chirp-trimmed.mp3");
 
-const pause = require("../assets/pause.svg");
-const play = require("../assets/play.svg");
 class Game extends Component {
   constructor(props) {
     super(props);
@@ -163,13 +161,13 @@ class Game extends Component {
 
           <Row className="my-2">
             <Col>
-              <button className="btn-block b1" onClick={this.handlePause}>
+              <button className="btn-block b3" onClick={this.handlePause}>
                 {this.determinePaused()}
               </button>
             </Col>
 
             <Col>
-              <button className="btn-block b1" onClick={this.handleRestart}>
+              <button className="btn-block b2" onClick={this.handleRestart}>
                 Restart Turn
               </button>
             </Col>

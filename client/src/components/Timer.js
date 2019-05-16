@@ -4,11 +4,6 @@ class Timer extends Component {
   constructor() {
     super();
   }
-
-  //   componentDidMount() {
-  //     this.setState({ millis: this.props.millis });
-  //   }
-
   calcDisplayTime = () => {
     let m = this.props.millis;
     let hour = Math.floor(m / 3600000);
