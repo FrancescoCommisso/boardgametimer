@@ -146,13 +146,13 @@ class Game extends Component {
           </Row>
 
           <Row className="">
-            <Col>
-              <h1 className={` pause-strip  ${p1}`}>Paused</h1>
-            </Col>
+            <Col />
           </Row>
           <Row className="my-3">
             <Col>
               <div className={`timer-div  ${p}`}>
+                <h1 className={` pause-strip  ${p1}`}>Paused</h1>
+
                 <h1>{this.state.gameState.currentPlayer}</h1>
                 <Timer millis={this.state.gameState.remainingTimeForTurn} />
 
