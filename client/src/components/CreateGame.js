@@ -66,10 +66,7 @@ class CreateGame extends Component {
           <h1 className="text-button text-center my-3">{this.state.new_id}</h1>
           <p>Others can use it to access this timer from their device!</p>
 
-          <button
-            className="bg-info btn-block b1"
-            onClick={this.handleOnCreate}
-          >
+          <button className=" btn-block b1" onClick={this.handleOnCreate}>
             Create New Timer
           </button>
 

@@ -84,12 +84,36 @@
   border-radius: 7px;
 }
 
+.paused {
+  visibility: visible;
+  border-color: #ff5757;
+}
+
+.paused-color {
+  background-color: #ff5757;
+}
+
+.pause-strip {
+  background-color: #ff5757;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
 .b2 {
   color: white;
   border: none;
   min-height: 50px;
   border-radius: 10px;
   background-color: #084c61;
+}
+.b3 {
+  color: white;
+  border: none;
+  min-height: 50px;
+  border-radius: 10px;
+  background-color: #066981;
 }
 
 .pause {
@@ -98,7 +122,4 @@
 
 .end {
   background-color: #da3a34;
-}
-
-.restart {
 }

@@ -70,7 +70,7 @@ class AddPlayers extends Component {
               <Col>
                 <button
                   type="button"
-                  className="btn-block b-new-player my-2"
+                  className="btn-block b3 my-2"
                   onClick={this.newPlayer}
                 >
                   Add
@@ -79,8 +79,7 @@ class AddPlayers extends Component {
               <Col>
                 <button
                   type="button"
-                  className="btn-block b-new-player my-2"
-                  style={{ background: "#da3a34" }}
+                  className="btn-block b2 my-2"
                   onClick={this.removePlayer}
                 >
                   Delete

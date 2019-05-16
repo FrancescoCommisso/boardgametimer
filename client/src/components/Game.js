@@ -8,8 +8,8 @@ import "pretty-checkbox/src/pretty-checkbox.scss";
 const pretty = require("pretty-ms");
 const Sound = require("react-sound").default;
 const missileSound = require("../assets/missile.mp3");
-const finishSound = require("../assets/foghorn.mp3");
-const bell = require("../assets/bell.mp3");
+const finishSound = require("../assets/foghorn-trimmed.mp3");
+const bell = require("../assets/bell-trimmed.mp3");
 const chirp = require("../assets/chirp-trimmed.mp3");
 
 const pause = require("../assets/pause.svg");
@@ -47,7 +47,7 @@ class Game extends Component {
       var elapsed = Math.abs(Date.now() - this.state.gameState.gameStartTime);
       this.setState({ totalTime: pretty(elapsed) });
       this.getRemainingTime();
-      if (this.state.gameState.remainingTimeForTurn <= 0) {
+      if (this.state.gameState.remainingTimeForTurn <= 1) {
         this.setState({ sound: Sound.status.PLAYING });
       }
     }, 100);
@@ -117,18 +117,14 @@ class Game extends Component {
     this.setState({ sound: Sound.status.STOPPED });
   };
 
-  // playsound = () => {
-  //   if (this.state.gameState.remainingTimeForTurn == 0) {
-  //     return Sound.status.PLAYING;
-  //   }
-  // };
-
   handleSleepChange = e => {
     this.setState({ preventSleep: e.target.checked });
   };
 
   render() {
     if (this.state.gameState) {
+      var p = this.state.gameState.paused ? "paused" : "running";
+      var p1 = this.state.gameState.paused ? "" : "d-none";
       return (
         <Container className="text-center my-4 sub">
           <Sound
@@ -149,24 +145,31 @@ class Game extends Component {
             </Col>
           </Row>
 
+          <Row className="">
+            <Col>
+              <h1 className={` pause-strip  ${p1}`}>Paused</h1>
+            </Col>
+          </Row>
           <Row className="my-3">
             <Col>
-              <div className="timer-div">
+              <div className={`timer-div  ${p}`}>
                 <h1>{this.state.gameState.currentPlayer}</h1>
                 <Timer millis={this.state.gameState.remainingTimeForTurn} />
+
                 <h5>Turn: {this.state.gameState.totalTurns}</h5>
               </div>
             </Col>
           </Row>
+
           <Row className="my-2">
             <Col>
-              <button className="btn-block b2" onClick={this.handlePause}>
+              <button className="btn-block b1" onClick={this.handlePause}>
                 {this.determinePaused()}
               </button>
             </Col>
 
             <Col>
-              <button className="btn-block b2" onClick={this.handleRestart}>
+              <button className="btn-block b1" onClick={this.handleRestart}>
                 Restart Turn
               </button>
             </Col>
@@ -174,7 +177,7 @@ class Game extends Component {
           <Row className="my-2 ">
             <Col>
               <button
-                className="btn-block b2 py-4"
+                className="btn-block b1 py-4"
                 onClick={this.handleEndTurn}
               >
                 End Turn
