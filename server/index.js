@@ -15,7 +15,7 @@ var games = {};
 function addTestGame() {
   var test = {
     id: "test",
-    players: ["player1", "player2", "player3", "player4"],
+    players: ["Player 1", "Player 2", "Player 3", "Player 4"],
     gameState: {
       paused: false,
       currentPlayer: null,

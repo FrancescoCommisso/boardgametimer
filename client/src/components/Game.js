@@ -10,7 +10,7 @@ const Sound = require("react-sound").default;
 const missileSound = require("../assets/missile.mp3");
 const finishSound = require("../assets/foghorn.mp3");
 const bell = require("../assets/bell.mp3");
-const chirp = require("../assets/chirp.mp3");
+const chirp = require("../assets/chirp-trimmed.mp3");
 
 const pause = require("../assets/pause.svg");
 const play = require("../assets/play.svg");
@@ -47,6 +47,9 @@ class Game extends Component {
       var elapsed = Math.abs(Date.now() - this.state.gameState.gameStartTime);
       this.setState({ totalTime: pretty(elapsed) });
       this.getRemainingTime();
+      if (this.state.gameState.remainingTimeForTurn <= 0) {
+        this.setState({ sound: Sound.status.PLAYING });
+      }
     }, 100);
   };
 
@@ -110,11 +113,15 @@ class Game extends Component {
     }
   };
 
-  playsound = () => {
-    if (this.state.gameState.remainingTimeForTurn == 0) {
-      return Sound.status.PLAYING;
-    }
+  handleFinish = () => {
+    this.setState({ sound: Sound.status.STOPPED });
   };
+
+  // playsound = () => {
+  //   if (this.state.gameState.remainingTimeForTurn == 0) {
+  //     return Sound.status.PLAYING;
+  //   }
+  // };
 
   handleSleepChange = e => {
     this.setState({ preventSleep: e.target.checked });
@@ -124,7 +131,13 @@ class Game extends Component {
     if (this.state.gameState) {
       return (
         <Container className="text-center my-4 sub">
-          <Sound url={chirp} playbackRate={4} playStatus={this.playsound()} />
+          <Sound
+            url={chirp}
+            playbackRate={4}
+            onFinishedPlaying={this.handleFinish}
+            playbackRate={1}
+            playStatus={this.state.sound}
+          />
           <Row>
             <Col className="text-left align-top ">
               <h5>Timer-ID</h5>
